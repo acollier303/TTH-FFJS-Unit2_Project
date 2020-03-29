@@ -19,10 +19,6 @@ FSJS project 2 - List Filter and Pagination
 const listItems = document.querySelectorAll('li');
 const itemsPerPage = 10;
 
-
-
-
-
 /*** 
    Create the `showPage` function to hide all of the items in the 
    list except for the ten you want to show.
@@ -40,19 +36,28 @@ const itemsPerPage = 10;
 
 /* Display Page Function - */
 const showPage = (list, page) => {
-   console.log(listItems.length);
-   startIndex = (page * itemsPerPage) - itemsPerPage;
-   endIndex = page * itemsPerPage;
-   for (i=1; i<list.length; i+=1){
-      if list.
-   }
-  
-   
+   //console.log(listItems[2]);
+   let startIndex = (page * itemsPerPage) - itemsPerPage;
+   let endIndex = page * itemsPerPage;
+   console.log(startIndex, endIndex);
+   let li = document.getElementByClassName('student-list').children;
+   console.log(li.textContent);
+
+   for (let i=1; i<list.length; i+=1){
+      if (list[i] >= startIndex && list[i]<= endIndex){
+         
+         
+      } else {
+
+      }
+   };  
 }
    //create a variable that contains li elements in the ul
+   const numOfLi = listItems.length;
+
 
    //Get length of the the variable above
-
+    
    //currentPage would hold the number of pages needed by dividing the number of li's by 10
 
 
@@ -68,7 +73,7 @@ const appendPageLinks = (list) => {
    
 }
 
-showPage(listItems, itemsPerPage);
+showPage(listItems, 3); 
 //showPage(list, itemsPerPage);
 //appendPageLinks();
    
