@@ -1,21 +1,10 @@
 /******************************************
 Treehouse Techdegree:
 FSJS project 2 - List Filter and Pagination
+Adrian Collier
 ******************************************/
-   
-// Study guide for this project - https://drive.google.com/file/d/1OD1diUsTMdpfMDv677TfL1xO2CEkykSz/view?usp=sharing
 
 
-/*** 
-   Add your global variables that store the DOM elements you will 
-   need to reference and/or manipulate. 
-   
-   But be mindful of which variables should be global and which 
-   should be locally scoped to one of the two main functions you're 
-   going to create. A good general rule of thumb is if the variable 
-   will only be used inside of a function, then it can be locally 
-   scoped to that function.
-***/
 const listItems = document.querySelectorAll('li');
 const itemsPerPage = 10;
 
@@ -39,29 +28,27 @@ const showPage = (list, page) => {
    //console.log(listItems[2]);
    let startIndex = (page * itemsPerPage) - itemsPerPage;
    let endIndex = page * itemsPerPage;
-   console.log(startIndex, endIndex);
-   let li = document.getElementByClassName('student-list').children;
-   console.log(li.textContent);
+   //console.log(startIndex, endIndex);
+   //console.log(li.length);
 
    for (let i=1; i<list.length; i+=1){
       if (list[i] >= startIndex && list[i]<= endIndex){
-         
-         
+        console.log('display none');
+        list[i].style.display = '';
       } else {
+         console.log('hide');
+         list[i].style.display = 'none';
 
+         //hide li's if condition is false
+         //list.style.display = 'none';
       }
-   };  
+   }; 
 }
    //create a variable that contains li elements in the ul
-   const numOfLi = listItems.length;
-
-
+   
    //Get length of the the variable above
     
    //currentPage would hold the number of pages needed by dividing the number of li's by 10
-
-
-
 
 /*** 
    Create the `appendPageLinks function` to generate, append, and add 
@@ -69,13 +56,19 @@ const showPage = (list, page) => {
 ***/
 
 const appendPageLinks = (list) => {
-      
+   const numOfPages = Math.ceil(listItems.length / 10); //rounds number of pages to the next largest integer
+   //console.log(numOfPages);
+   const mainDiv = document.querySelector('.page');
+   const buttonDiv = document.createElement('div');
+   buttonDiv.className = 'pagination';
+   mainDiv.appendChild(buttonDiv);
+
+
    
 }
 
-showPage(listItems, 3); 
-//showPage(list, itemsPerPage);
-//appendPageLinks();
+showPage(listItems, 1); 
+//appendPageLinks(listItems);
    
 
 
