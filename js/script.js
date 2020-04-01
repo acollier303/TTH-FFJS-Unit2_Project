@@ -36,13 +36,27 @@ const appendPageLinks = (list) => {
    //console.log(numOfPages);
    const mainDiv = document.querySelector('.page');
    const buttonDiv = document.createElement('div');
+   const ul = document.createElement('ul');
+   
    buttonDiv.className = 'pagination';
    mainDiv.appendChild(buttonDiv);
+   buttonDiv.appendChild(ul);
+   
+   //Loop through pages and add li for every page
+   for (i=0; i < numOfPages; i+= 1){
+      const li = document.createElement('li');
+      ul.appendChild(li);
+      const button = document.createElement('button');
+      li.appendChild(button);
+      button.innerHTML = `<a href="#">${i+1}</a>`;
+      
+
+   }
 
 
    
 }
 
 showPage(listItems, 3); 
-//appendPageLinks(listItems);
+appendPageLinks(listItems);
    
