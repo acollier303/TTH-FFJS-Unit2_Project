@@ -13,10 +13,10 @@ const itemsPerPage = 10;
 const showPage = (list, page) => {
    // Variables for start and end of list items  from page
    let startIndex = (page * itemsPerPage) - itemsPerPage;
-   let endIndex = (page * itemsPerPage)-1;
+   let endIndex = (page * itemsPerPage);
 
    //Cycles throught list and shows 10 students
-   for (let i=1; i<list.length; i+=1){
+   for (let i=0; i<list.length; i+=1){
       if (i >= startIndex && i <= endIndex) {
          console.log('show');
         list[i].style.display = '';
@@ -43,6 +43,6 @@ const appendPageLinks = (list) => {
    
 }
 
-showPage(listItems, 1); 
+showPage(listItems, 3); 
 //appendPageLinks(listItems);
    
