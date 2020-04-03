@@ -52,25 +52,29 @@ const appendPageLinks = (list) => {
 
       //adds page number to each link
       link.textContent = `${i+1}`;
-      link.setAttribute('class', ''); 
+      link.setAttribute('class', '');
+       
             
-       if (i === 0){
-           link.setAttribute('class', 'active');
-       };
+      //  if (i === 0){
+      //      link.setAttribute('class', 'active');
+      //  };
 
       //page link event handler
    };      
       buttonDiv.addEventListener('click', (e) =>{
          const currentPage = Number.parseInt(e.target.textContent);
+         const a = document.getElementsByTagName('a');
          console.log(currentPage);
          console.log(e.target);
-         e.target.setAttribute('class', '');
-         if (e.target){
-            e.target.setAttribute('class', 'active');
-         } else {
-            e.target.sib
-         }     
-                     
+          
+         // if (e.target){
+         //    e.target.setAttribute('class', 'active');
+         //    console.log(a);
+         // } else {
+         //    a.setAttribute('class', '');
+            
+         // }     
+                 
          showPage(listItems, currentPage);
       });
 
