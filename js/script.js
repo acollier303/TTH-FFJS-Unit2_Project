@@ -7,6 +7,19 @@ Adrian Collier
 //Global Variables
 const listItems = document.querySelectorAll('li'); // targets all li's on the page
 const itemsPerPage = 10;
+const page = 1;
+
+const activePage = () => {
+   const pageLinks = document.getElementsByTagName('a');
+   for (let i = 0; i< listItems.length; i+=1){
+      if (pageLinks == page){
+         pageLinks[i].setAttribute('class', 'active');
+      } else {
+         pageLinks[i].setAttribute('class', '');
+      }
+      
+   }
+}
 
 
 
@@ -69,14 +82,13 @@ const appendPageLinks = (list) => {
          const a = document.getElementsByTagName('a');
          console.log(currentPage);
          console.log(e.target);
-         
+
      
-         if (e.target){
-            e.target.setAttribute('class', 'active');
-            console.log(a);
-         } else {
-            ul.children.firstChild.setAttribute('class', '');
-         }    
+         // if (e.target){
+         //    e.target.setAttribute('class', 'active');
+         //    } else {
+         //    ul.children.firstChild.setAttribute('class', '');
+         // }    
                  
          showPage(listItems, currentPage);
       });
