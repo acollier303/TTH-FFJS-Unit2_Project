@@ -25,7 +25,8 @@ const showPage = (list, page) => {
       }
    };
 }
-  
+
+
 /*** 
    `appendPageLinks function` to generate, append, and add 
    functionality to the pagination buttons.
@@ -42,6 +43,9 @@ const appendPageLinks = (list) => {
    mainDiv.appendChild(buttonDiv);
    buttonDiv.appendChild(ul);
 
+   //run showPage function to show page 1
+   showPage(listItems, 1);
+
    //Loop through pages and add li for every page
    for (let i=0; i < numOfPages; i+= 1){
       const li = document.createElement('li');
@@ -53,27 +57,26 @@ const appendPageLinks = (list) => {
       //adds page number to each link
       link.textContent = `${i+1}`;
       link.setAttribute('class', '');
-       
-            
-      //  if (i === 0){
-      //      link.setAttribute('class', 'active');
-      //  };
-
-      //page link event handler
+      
+      // Sets the first li link to active
+      ul.firstChild.firstChild.setAttribute('class', 'active');
+        
+   
    };      
+      //page link event handler
       buttonDiv.addEventListener('click', (e) =>{
          const currentPage = Number.parseInt(e.target.textContent);
          const a = document.getElementsByTagName('a');
          console.log(currentPage);
          console.log(e.target);
-          
-         // if (e.target){
-         //    e.target.setAttribute('class', 'active');
-         //    console.log(a);
-         // } else {
-         //    a.setAttribute('class', '');
-            
-         // }     
+         
+     
+         if (e.target){
+            e.target.setAttribute('class', 'active');
+            console.log(a);
+         } else {
+            ul.children.firstChild.setAttribute('class', '');
+         }    
                  
          showPage(listItems, currentPage);
       });
