@@ -10,7 +10,9 @@ const itemsPerPage = 10;
 let currentPage = 1;
 
 
-/* Show Page Function - */
+/***
+showPage(): Creates a page that shows 10 students at a time
+***/
 const showPage = (list, page) => {
    // Variables for start and end of list items  from page
    let startIndex = (page * itemsPerPage) - itemsPerPage;
@@ -26,25 +28,25 @@ const showPage = (list, page) => {
    };
 }
 
-
 /*** 
-   `appendPageLinks function` to generate, append, and add 
+   appendPageLinks() Generates, appends, and adds 
    functionality to the pagination buttons.
 ***/
 const appendPageLinks = (list) => {
    const numOfPages = Math.ceil(listItems.length / 10); //rounds number of pages to the next largest integer
-  
    //html elements created
    const mainDiv = document.querySelector('.page');
    const buttonDiv = document.createElement('div');
    const ul = document.createElement('ul');
    
    buttonDiv.className = 'pagination';
+   
+   // Add div elements to the DOM
    mainDiv.appendChild(buttonDiv);
    buttonDiv.appendChild(ul);
 
    //run showPage function to show page 1
-   showPage(listItems, 1);
+   showPage(listItems, currentPage);
    
    //Loop through pages and add li and link for every page
    for (let i=0; i < numOfPages; i+= 1){
@@ -58,39 +60,27 @@ const appendPageLinks = (list) => {
 
       //adds page number to each link
       link.textContent = `${currentPage}`;
-      //link.setAttribute('class', '');
+      link.className = '';     
       
       // Sets the first li link to active
       ul.firstChild.firstChild.setAttribute('class', 'active');
-      
-         //   //activePage function sets class attribute for links
-         //   const activePage = () => {
-         //    const pageLinks = document.getElementsByTagName('a');
-         //    for (let i = 0; i< pageLinks.length; i+=1){
-         //       if (pageLinks[i] == currentPage){
-         //          pageLinks[i].setAttribute('class', 'active');
-         //       } else {
-         //          pageLinks[i].setAttribute('class', '');
-         //       }
-         //    }
-         // };
-   
+         
    };      
       //page link event handler
       buttonDiv.addEventListener('click', (e) =>{
          let currentPage = Number.parseInt(e.target.textContent);
          const a = document.getElementsByTagName('a');
-         console.log(currentPage);
-         console.log(e.target);
-       
-             if (e.target.className == currentPage){
-            e.target.setAttribute('class', 'active');
-            } else {
-            //e.target.classList.remove('.pagination li a.active');   
+         const selectedPage = currentPage;
+         
+        // Remove
+         for (let j = 0; j< a.length; j+=1){
+            a[j].classList.remove('active');
          }
+         
+         e.target.classList.add('active');
         
          showPage(listItems, currentPage);
       });
-
    }
+   
 appendPageLinks(listItems);
