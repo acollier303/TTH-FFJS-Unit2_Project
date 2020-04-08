@@ -7,11 +7,11 @@ Adrian Collier
 //Global Variables
 const listItems = document.querySelectorAll('li'); // targets all li's on the page
 const itemsPerPage = 10;
-//const search = document.querySelector('input'); //
-//const submit = document.getElementById('submit-button');
 let currentPage = 1;
 
-//Seach DOM Elements
+/***
+Seach DOM Elements
+***/
 const searchDiv = document.querySelector('.page-header');
       
 // Create and append 'wrapper'
@@ -19,14 +19,14 @@ const wrapper = document.createElement('div');
 wrapper.classList.add('student-search');
 searchDiv.appendChild(wrapper);
 
-//Create and append 'search input'
+//Create and append 'input'
 const input = document.createElement('input');
 input.setAttribute('class', 'input');
 input.value = ('Search for students...');
 wrapper.appendChild(input);
 console.log(input.className);
 
-//Create and append search button
+//Create and append 'searchButton'
 const searchButton = document.createElement('button');
 searchButton.setAttribute('id', 'submit-button');
 searchButton.textContent = ("Search");
@@ -106,26 +106,33 @@ const appendPageLinks = (list) => {
    }
  
    /***
-    searchPage() Search for students
-    from user input
-    */
+    searchStudent() Search for students
+    from user input.
+   ***/
    const searchStudent = (searchInput, list) => {
+      let results = [];
       //Search loop
       for (let i=0; i<list.length; i+= 1){
-         list[i].style.display= 'none';
-         if (searchInput.value.length != 0 && list[i].textContent.toLowerCase().includes(searchInput.value.toLowerCase()))
+         list[i].style.display= 'none'; // hides non matching results
+         if (searchInput.value.length != 0 && 
+               list[i].textContent.toLowerCase().includes(searchInput.value.toLowerCase()))
             {
-            list[i].style.display = '';
+            list[i].style.display = ''; //display's matching results
+            results.push(list[i]);
             }
-     };
-     
+         };
+      //appendPageLinks(results);
    }
 
+// Search button handler
 searchButton.addEventListener('click', (e) =>{
    event.preventDefault();
    searchStudent(input, listItems);
+   showPage(results, 1);
+   appendPageLinks(results);
 });
 
+// User input handler
 input.addEventListener('keyup', () => {
    searchStudent(input, listItems);
 })
