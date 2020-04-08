@@ -7,8 +7,30 @@ Adrian Collier
 //Global Variables
 const listItems = document.querySelectorAll('li'); // targets all li's on the page
 const itemsPerPage = 10;
+//const search = document.querySelector('input'); //
+//const submit = document.getElementById('submit-button');
 let currentPage = 1;
 
+//Seach DOM Elements
+const searchDiv = document.querySelector('.page-header');
+      
+// Create and append 'wrapper'
+const wrapper = document.createElement('div');
+wrapper.classList.add('student-search');
+searchDiv.appendChild(wrapper);
+
+//Create and append 'search input'
+const input = document.createElement('input');
+input.setAttribute('class', 'input');
+input.value = ('Search for students...');
+wrapper.appendChild(input);
+console.log(input.className);
+
+//Create and append search button
+const searchButton = document.createElement('button');
+searchButton.setAttribute('id', 'submit-button');
+searchButton.textContent = ("Search");
+wrapper.appendChild(searchButton);
 
 /***
 showPage(): Creates a page that shows 10 students at a time
@@ -24,7 +46,7 @@ const showPage = (list, page) => {
         list[i].style.display = '';
       }else{
          list[i].style.display = 'none';
-      }
+      };
    };
 }
 
@@ -64,9 +86,9 @@ const appendPageLinks = (list) => {
       
       // Sets the first li link to active
       ul.firstChild.firstChild.setAttribute('class', 'active');
-         
    };      
-      //page link event handler
+
+   //page link event handler
       buttonDiv.addEventListener('click', (e) =>{
          let currentPage = Number.parseInt(e.target.textContent);
          const a = document.getElementsByTagName('a');
@@ -82,32 +104,30 @@ const appendPageLinks = (list) => {
          showPage(listItems, currentPage);
       });
    }
-
+ 
    /***
     searchPage() Search for students
     from user input
     */
-   const searchStudent = (list) => {
-      const searchDiv = document.querySelector('.page-header');
-      
-      const wrapper = document.createElement('div');
-      wrapper.classList.add('student-search');
-      searchDiv.appendChild(wrapper);
+   const searchStudent = (searchInput, list) => {
+      //Search loop
+      for (let i=0; i<list.length; i+= 1){
+         list[i].style.display= 'none';
+         if (searchInput.value.length != 0 && list[i].textContent.toLowerCase().includes(searchInput.value.toLowerCase()))
+            {
+            list[i].style.display = '';
+            }
+     };
+     
+   }
 
-      //search input
-      const searchInput = document.createElement('input');
-      searchInput.setAttribute('class', 'input');
-      searchInput.value = ('Search for students...');
-      wrapper.appendChild(searchInput);
-      console.log(searchInput.className);
-      
-      //search button
-      const searchButton = document.createElement('button');
-      searchButton.textContent = ("Search");
-      wrapper.appendChild(searchButton);
+searchButton.addEventListener('click', (e) =>{
+   event.preventDefault();
+   searchStudent(input, listItems);
+});
 
-      
-   };
-   
-searchStudent(listItems);
+input.addEventListener('keyup', () => {
+   searchStudent(input, listItems);
+})
+
 appendPageLinks(listItems);
