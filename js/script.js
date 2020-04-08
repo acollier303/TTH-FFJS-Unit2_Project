@@ -82,5 +82,32 @@ const appendPageLinks = (list) => {
          showPage(listItems, currentPage);
       });
    }
+
+   /***
+    searchPage() Search for students
+    from user input
+    */
+   const searchStudent = (list) => {
+      const searchDiv = document.querySelector('.page-header');
+      
+      const wrapper = document.createElement('div');
+      wrapper.classList.add('student-search');
+      searchDiv.appendChild(wrapper);
+
+      //search input
+      const searchInput = document.createElement('input');
+      searchInput.setAttribute('class', 'input');
+      searchInput.value = ('Search for students...');
+      wrapper.appendChild(searchInput);
+      console.log(searchInput.className);
+      
+      //search button
+      const searchButton = document.createElement('button');
+      searchButton.textContent = ("Search");
+      wrapper.appendChild(searchButton);
+
+      
+   };
    
+searchStudent(listItems);
 appendPageLinks(listItems);
