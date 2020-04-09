@@ -120,7 +120,7 @@ const appendPageLinks = (list) => {
             list[i].style.display = ''; //display's matching results
             results.push(list[i]);
             }
-         };
+      };
       //appendPageLinks(results);
    }
 
@@ -128,13 +128,15 @@ const appendPageLinks = (list) => {
 searchButton.addEventListener('click', (e) =>{
    event.preventDefault();
    searchStudent(input, listItems);
-   showPage(results, 1);
    appendPageLinks(results);
+   //showPage(results, 1);
+   
 });
 
 // User input handler
 input.addEventListener('keyup', () => {
    searchStudent(input, listItems);
+   
 })
 
 appendPageLinks(listItems);
