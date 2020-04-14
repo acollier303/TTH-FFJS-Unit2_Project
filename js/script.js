@@ -109,33 +109,36 @@ const appendPageLinks = (list) => {
     searchStudent() Search for students
     from user input.
    ***/
-   const searchStudent = (searchInput, list) => {
+   const searchStudent = (searchInput) => {
       let results = [];
       //Search loop
-      for (let i=0; i<list.length; i+= 1){
-         list[i].style.display= 'none'; // hides non matching results
+      for (let i=0; i<listItems.length; i+= 1){
+         listItems[i].style.display= 'none'; // hides non matching results
          if (searchInput.value.length != 0 && 
-               list[i].textContent.toLowerCase().includes(searchInput.value.toLowerCase()))
+               listItems[i].textContent.toLowerCase().includes(searchInput.value.toLowerCase()))
             {
-            list[i].style.display = ''; //display's matching results
-            results.push(list[i]);
+            listItems[i].style.display = ''; //display's matching results
+            results.push(listItems[i]);
+            console.log(results);
             }
       };
       //appendPageLinks(results);
+      return results;
+
    }
 
 // Search button handler
 searchButton.addEventListener('click', (e) =>{
    event.preventDefault();
-   searchStudent(input, listItems);
-   appendPageLinks(results);
-   //showPage(results, 1);
+   searchStudent(input);
+   // showPage(searchStudent, 1);
    
 });
 
 // User input handler
 input.addEventListener('keyup', () => {
-   searchStudent(input, listItems);
+    
+   searchStudent(input);
    
 })
 
