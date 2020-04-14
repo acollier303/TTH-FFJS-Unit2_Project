@@ -1,7 +1,7 @@
 /******************************************
 Treehouse Techdegree:
 FSJS project 2 - List Filter and Pagination
-Adrian Collier 4/14/2020
+Adrian Collier
 ******************************************/
 
 //Global Variables
@@ -9,6 +9,28 @@ const listItems = document.querySelectorAll('li'); // targets all li's on the pa
 const itemsPerPage = 10;
 let currentPage = 1;
 
+/***
+Seach DOM Elements
+***/
+const searchDiv = document.querySelector('.page-header');
+      
+// Create and append 'wrapper'
+const wrapper = document.createElement('div');
+wrapper.classList.add('student-search');
+searchDiv.appendChild(wrapper);
+
+//Create and append 'input'
+const input = document.createElement('input');
+input.setAttribute('class', 'input');
+input.value = ('Search for students...');
+wrapper.appendChild(input);
+console.log(input.className);
+
+//Create and append 'searchButton'
+const searchButton = document.createElement('button');
+searchButton.setAttribute('id', 'submit-button');
+searchButton.textContent = ("Search");
+wrapper.appendChild(searchButton);
 
 /***
 showPage(): Creates a page that shows 10 students at a time
@@ -83,6 +105,41 @@ const appendPageLinks = (list) => {
       });
    }
  
+   /***
+    searchStudent() Search for students
+    from user input.
+   ***/
+   const searchStudent = (searchInput) => {
+      let results = [];
+      //Search loop
+      for (let i=0; i<listItems.length; i+= 1){
+         listItems[i].style.display= 'none'; // hides non matching results
+         if (searchInput.value.length != 0 && 
+               listItems[i].textContent.toLowerCase().includes(searchInput.value.toLowerCase()))
+            {
+            listItems[i].style.display = ''; //display's matching results
+            results.push(listItems[i]);
+            console.log(results);
+            }
+      };
+      //appendPageLinks(results);
+      return results;
+
+   }
+
+// Search button handler
+searchButton.addEventListener('click', (e) =>{
+   event.preventDefault();
+   searchStudent(input);
+   // showPage(searchStudent, 1);
    
+});
+
+// User input handler
+input.addEventListener('keyup', () => {
+    
+   searchStudent(input);
+   
+})
 
 appendPageLinks(listItems);
